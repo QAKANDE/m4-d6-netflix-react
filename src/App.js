@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import "./App.css";
+
 import { Container, Alert, Dropdown } from "react-bootstrap";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Gallery from "./components/Gallery";
+import MovieDetails from "./components/MovieDetails"
+import Movie from "./components/Movie"
 
 class App extends Component {
   constructor(props) {
@@ -19,7 +22,7 @@ class App extends Component {
     };
   }
 
-  url = "http://www.omdbapi.com/?apikey=[INSERT_YOUR_API_KEY_HERE]";
+  url = "http://www.omdbapi.com/?apikey=809d53f5";
 
   componentDidMount = () => {
     Promise.all([
@@ -58,7 +61,7 @@ class App extends Component {
     const commentsUrl = "https://striveschool.herokuapp.com/api/comments/";
     const comments = await fetch(commentsUrl + movieID, {
       headers: new Headers({
-        Authorization: "[INSERT_YOUR_AUTH_HERE]",
+        Authorization: "Basic dXNlcjIzOjJhazlFNXFxQkt2VjJ3a3k=",
       }),
     }).then((response) => response.json());
     this.setState({ comments });
@@ -66,9 +69,10 @@ class App extends Component {
 
   render() {
     return (
+      <>
       <div className="App">
-        <div>
           <Navbar showSearchResult={this.showSearchResult} />
+        <div>
           <Container fluid className="px-4">
             <div className="d-flex justify-content-between">
               <div className="d-flex">
@@ -102,12 +106,12 @@ class App extends Component {
             )}
             {this.state.searchedMovies.length > 0 && (
               <Gallery
-                title="Search results"
-                fetchComments={this.fetchComments}
-                comments={this.state.comments}
-                movies={this.state.searchedMovies}
+              title="Search results"
+              fetchComments={this.fetchComments}
+              comments={this.state.comments}
+              movies={this.state.searchedMovies}
               />
-            )}
+              )}
             {!this.state.error && !this.state.searchedMovies.length > 0 && (
               <>
                 <Gallery
@@ -116,27 +120,29 @@ class App extends Component {
                   fetchComments={this.fetchComments}
                   comments={this.state.comments}
                   movies={this.state.harryPotterMovies.slice(0, 6)}
-                />
+                  />
                 <Gallery
                   title="Spider Man"
                   loading={this.state.loading}
                   fetchComments={this.fetchComments}
                   comments={this.state.comments}
                   movies={this.state.spiderManMovies.slice(0, 6)}
-                />
+                  />
                 <Gallery
                   title="Star Wars"
                   loading={this.state.loading}
                   fetchComments={this.fetchComments}
                   comments={this.state.comments}
                   movies={this.state.starWarsMovies.slice(0, 6)}
-                />
+
+                  />
               </>
             )}
-            <Footer />
           </Container>
         </div>
+      <Footer />
       </div>
+      </>
     );
   }
 }

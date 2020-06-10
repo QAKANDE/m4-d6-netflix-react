@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./App.css";
 
 import { Container, Alert, Dropdown } from "react-bootstrap";
-import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Gallery from "./components/Gallery";
 import MovieDetails from "./components/MovieDetails"
@@ -74,7 +73,6 @@ class App extends Component {
     return (
       <>
       <div className="App">
-          <Navbar showSearchResult={this.showSearchResult} />
         <div>
           <Container fluid className="px-4">
             <div className="d-flex justify-content-between">

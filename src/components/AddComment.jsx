@@ -2,29 +2,39 @@ import React, { Component } from 'react';
 import { Form, Row, Col, Button } from 'react-bootstrap'
 import './AddComment.css'
 class AddComment extends Component {
-    state = { 
-            NewComments:{
-                comment:'',
-                rate :'',
-                bookID :this.props.id
+    constructor(props){
+        super(props);
+
+        this.state = { 
+                comments:{
+                    comment:'',
+                    rate :'',
+                    bookID:'',
+                }
             }
-        }
+    }
         updateComment = (event) => {
-            let NewComments = this.state.NewComments
+            let comments = this.state.comments
             let id  = event.currentTarget.id;
            if(id === 'rate' || id === 'bookID'){
-             NewComments[id] = parseInt(event.currentTarget.value)
+             comments[id] = parseInt(event.currentTarget.value)
            }
            else {
-             NewComments[id] = event.currentTarget.value
+             comments[id] = event.currentTarget.value
            }
-           this.setState({NewComments})
+           this.setState({
+               comments:{
+                   comment:comments.comment.value,
+                   rate:comments.rate.value,
+                   bookID:comments.bookID.value
+               }
+           })
             }
             submitComment = async () => {
                 try{
                     let response = await fetch("https://striveschool.herokuapp.com/api/comments/",{
                         method:"POST",
-                        body: JSON.stringify(this.state.NewComments),
+                        body: JSON.stringify(this.state.comments),
                         Headers:({
                             'Content-Type' : 'Application/json',
                             'Authorization':'Basic dXNlcjIzOjJhazlFNXFxQkt2VjJ3a3k='
@@ -36,7 +46,8 @@ class AddComment extends Component {
                     else{
                       alert('something wrong')
                     }
-                }catch(err){
+                }
+                catch(err){
                     console.log(err)
                 }
                     }
@@ -53,7 +64,7 @@ class AddComment extends Component {
                   name="comment"
                   id="comment"
                   placeholder="Please enter your comment"
-                  value={this.state.NewComments.comment}
+                  value={this.state.comments.comment}
                   onChange={this.updateComment}
                 />
               </Form.Group>
@@ -66,7 +77,7 @@ class AddComment extends Component {
                   as="select"
                   name="rate"
                   id="rate"
-                  value={this.state.NewComments.rate}
+                  value={this.state.comments.rate}
                   onChange={this.updateComment}
                 >
                   <option>1</option>

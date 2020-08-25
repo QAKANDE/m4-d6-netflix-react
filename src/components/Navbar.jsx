@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Navbar, Nav, InputGroup, FormControl } from "react-bootstrap";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 class NetflixNavbar extends Component {
   constructor(props) {
@@ -22,13 +22,7 @@ class NetflixNavbar extends Component {
   render() {
     return (
       <Navbar variant="dark" expand="lg" style={{ backgroundColor: "#221f1f" }}>
-        <Navbar.Brand href="/">
-          <img
-            src="assets/logo.png"
-            alt="logo"
-            style={{ width: "100px", height: "55px" }}
-          />
-        </Navbar.Brand>
+        <Navbar.Brand href="/">Margarita's Amazing Netflix</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
@@ -47,7 +41,9 @@ class NetflixNavbar extends Component {
             <Nav.Link className="font-weight-bold" href="/">
               My List
             </Nav.Link>
-            <Link to="/Register" className="nav-link">Sign Up</Link>
+            <Link to="/Register" className="nav-link">
+              Sign Up
+            </Link>
           </Nav>
           <span className="d-none d-md-flex align-items-center">
             <InputGroup className="icons">
